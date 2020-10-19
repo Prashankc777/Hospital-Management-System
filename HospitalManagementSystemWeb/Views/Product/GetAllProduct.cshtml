@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Product>
+
+<h1 style="text-align:center">Product</h1>
+
+
+
+<div class="container">
+
+    <a asp-controller="Product" asp-action="CreateProduct" class="btn btn-primary">Create </a> <br />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.CategoryName)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Company)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Price)</th>
+                <th scope="col">Actions</th>
+
+            </tr>
+        </thead>
+        @if (Model.Any())
+        {
+            <tbody>
+                @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+                {
+                    <tr>
+
+                        <td> @item.Index</td>
+                        <td>@Html.DisplayFor(modelItem => item.Data.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Data.CategoryName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Data.Company)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Data.Price)</td>
+                        <td><a asp-controller="Product" asp-action="EditProduct" asp-route-id="@item.Data.EncryptId" class="btn btn-primary"> Edit</a></td>
+                        <td><a asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@item.Data.EncryptId" class="btn btn-danger"> Delete</a></td>
+
+
+
+
+
+                    </tr>
+                }
+            </tbody>
+
+        }
+
+    </table>
+
+</div>
+

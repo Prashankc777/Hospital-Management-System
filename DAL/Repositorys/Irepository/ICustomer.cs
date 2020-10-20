@@ -13,5 +13,7 @@ namespace DAL.Repositorys.Irepository
         Customer AddCustomer(Customer Customer);
         Customer Update(Customer Customer);
         Customer DeleteCustomer(int id);
+
+       
     }
 }

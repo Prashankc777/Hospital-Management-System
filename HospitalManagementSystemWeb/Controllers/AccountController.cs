@@ -75,6 +75,7 @@ namespace HospitalManagementSystemWeb.Controllers
         [HttpPost]
         public async  Task<IActionResult> Login(string returnUrl, LoginViewModel model)
         {
+            
             if (!ModelState.IsValid) return View();
             var Result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
 

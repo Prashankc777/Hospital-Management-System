@@ -38,24 +38,23 @@ namespace HospitalManagementSystemWeb.Controllers
         [HttpGet]
         public IActionResult CreateProduct()
         {
-           
+
             return View();
         }
 
         [HttpPost]
         public IActionResult CreateProduct(Product product)
         {
-            if (!ModelState.IsValid) return View();
-            var emp = _product.AddProduct(product);
+            if (!ModelState.IsValid || !_product.ProductExist(product.Name)) return View();
+            _product.AddProduct(product);
             return RedirectToAction(nameof(GetAllProduct));
+
+
         }
 
-        [HttpGet] 
+        [HttpGet]
         public IActionResult EditProduct(string id)
         {
-            if (!ModelState.IsValid) return View();
-
-            
             var emp = _product.GetProduct(Convert.ToInt32(protector.Unprotect(id)));
             return View(emp);
         }
@@ -71,9 +70,7 @@ namespace HospitalManagementSystemWeb.Controllers
         [HttpGet]
         public IActionResult DeleteProduct(string id)
         {
-            if (!ModelState.IsValid) return View();
-            var emp = _product.GetProduct(Convert.ToInt32(protector.Unprotect(id)));
-            return View(emp);
+            return !ModelState.IsValid ? View() : View(_product.GetProduct(Convert.ToInt32(protector.Unprotect(id))));
         }
 
         [HttpPost]

@@ -42,8 +42,14 @@ namespace HospitalManagementSystemWeb.Controllers
         [HttpPost]
         public IActionResult CreteCustomer(Customer customer)
         {
-            if (!ModelState.IsValid) return View();
-            var addCustomer = _customer.AddCustomer(customer);
+            if (!ModelState.IsValid)
+            {
+                ModelState.SelectMany(
+                    x => x.Value.Errors,
+                    (state, error) => $"{state.Key}:  {error.ErrorMessage}");
+                return View();
+            }
+            _customer.AddCustomer(customer);
             return RedirectToAction(nameof(GetAllCustomer));
 
         }
@@ -51,18 +57,14 @@ namespace HospitalManagementSystemWeb.Controllers
         [HttpGet]
         public IActionResult EditCustomer(string id)
         {
-            if (!ModelState.IsValid) return View();
-
-            var GetOne = _customer.GetCustomer(int.Parse(_protector.Unprotect(id)));
-            return View(GetOne);
-
+            return !ModelState.IsValid ? View() : View(_customer.GetCustomer(Convert.ToInt32(_protector.Unprotect(id))));
         }
 
         [HttpPost]
         public IActionResult EditCustomer(Customer customer)
         {
             if (!ModelState.IsValid) return View();
-            var GetOne = _customer.Update(customer);
+            _customer.Update(customer);
             return RedirectToAction(nameof(GetAllCustomer));
 
         }

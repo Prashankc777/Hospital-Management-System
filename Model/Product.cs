@@ -15,10 +15,8 @@ namespace Model.Product
         [Required]
         public string Company { get; set; }
         public int ProductId { get; set; }
-
-        [Required]
         public int CategoryId { get; set; }
-        
+
         [Display(Name = "Category")]
         public string CategoryName { get; set; }
         

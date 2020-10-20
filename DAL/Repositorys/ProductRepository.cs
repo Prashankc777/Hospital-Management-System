@@ -56,5 +56,15 @@ namespace DAL.Repositorys
             return pro;
 
         }
+
+        public bool ProductExist(string name)
+        {
+            var IsNameExist = GetAllProducts().FirstOrDefault(x => x.Name == name);
+            if (IsNameExist is null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

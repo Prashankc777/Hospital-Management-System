@@ -45,6 +45,8 @@ namespace HospitalManagementSystemWeb
                
             services.AddControllersWithViews();
             services.AddSingleton<IProduct, ProductRepository>();
+            services.AddSingleton<ICustomer, CustomerRepository>();
+            services.AddSingleton<ICategory, CategoryRespository>();
             services.AddSingleton<DataProtectionPurposeStrings>();
             services.AddRazorPages();
         }

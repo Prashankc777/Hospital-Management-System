@@ -1,0 +1,35 @@
+﻿@model Customer
+
+<h1>Employee Details</h1>
+
+<div class="container">
+
+    <form asp-controller="Customer" asp-action="DeleteCustomer" method="post" class="mt-3">
+
+
+        <input type="hidden" asp-for="CustomerId" />
+
+        <div class="form-group">
+            <label asp-for="CustomerName"></label>
+            <input readonly="readonly" asp-for="CustomerName" class="form-control" placeholder="Product Name">
+            <span asp-validation-for="CustomerName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Address"></label>
+            <input readonly="readonly" asp-for="Address" class="form-control" placeholder="Company">
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PhoneNumber"></label>
+            <input readonly="readonly" asp-for="PhoneNumber" class="form-control" placeholder="Price">
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <button type="submit" asp-controller="Customer" asp-action="DeleteCustomer" asp-route-id="@Model.CustomerId" class="btn btn-danger">Delete</button>
+        <button type="submit" asp-controller="Customer" asp-action="GetAllCustomer" class="btn btn-success">Cancel</button>
+
+
+
+
+    </form>
+</div>

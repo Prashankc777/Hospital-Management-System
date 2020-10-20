@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Customer>
+
+<h1 style="text-align:center">Customer</h1>
+
+
+
+<div class="container">
+
+    <a asp-controller="Customer" asp-action="CreteCustomer" class="btn btn-primary">Create </a> <br />
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.CustomerName)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.Address)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+            <th scope="col">Actions</th>
+
+        </tr>
+        </thead>
+        @if (Model.Any())
+        {
+            <tbody>
+            @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i + 1 }))
+            {
+                <tr>
+
+                    <td> @item.Index</td>
+                    <td>@Html.DisplayFor(modelItem => item.Data.CustomerName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Data.Address)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Data.PhoneNumber)</td>
+                    <td><a asp-controller="Customer" asp-action="EditCustomer" asp-route-id="@item.Data.EncryptId" class="btn btn-primary"> Edit</a></td>
+                    <td><a asp-controller="Customer" asp-action="DeleteCustomer" asp-route-id="@item.Data.EncryptId" class="btn btn-danger"> Delete</a></td>
+
+
+
+
+
+                </tr>
+            }
+            </tbody>
+
+        }
+
+    </table>
+
+</div>

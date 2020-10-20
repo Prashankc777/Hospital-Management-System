@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Model
@@ -13,15 +14,10 @@ namespace Model
         [MaxLength(256, ErrorMessage = "Your name is too long, the maximum is 256 character.")]
         public string CustomerName { get; set; }
         public string Address { get; set; }
-        public string CreatedBy { get; set; }
-        public System.DateTime? createdOn { get; set; }
-        public string EditedBy { get; set; }
-        public System.DateTime? EditedOn { get; set; }
-        public string DeletedBy { get; set; }
-
+        [NotMapped]
         public string EncryptId { get; set; }
-        public string DeletedOn { get; set; }
-        [Phone]
+       
+     
         public decimal? PhoneNumber { get; set; }
 
     }

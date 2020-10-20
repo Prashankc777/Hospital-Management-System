@@ -13,6 +13,7 @@ namespace DAL.Repositorys.Irepository
         Product AddProduct(Product product);
         Product Update(Product product);
         Product DeleteProduct(int id);
+        bool ProductExist(string name);
 
     }
 }

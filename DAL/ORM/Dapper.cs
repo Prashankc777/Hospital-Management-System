@@ -16,36 +16,36 @@ namespace DAL.ORM
 
         public static void ExceptionWithoutReturn(string procedureName, DynamicParameters param = null)
         {
-            using var SqlCon = new SqlConnection(connectionString: ConnectionString);
-            if (SqlCon.State != ConnectionState.Open)
+            using var sqlCon = new SqlConnection(connectionString: ConnectionString);
+            if (sqlCon.State != ConnectionState.Open)
             {
-                SqlCon.Open();
+                sqlCon.Open();
             }
 
-            SqlCon.Execute(procedureName, param: param, commandType: CommandType.StoredProcedure);
+            sqlCon.Execute(procedureName, param: param, commandType: CommandType.StoredProcedure);
         }
 
         public static T ExecuteReturnScalar<T>(string procedureName, DynamicParameters param = null)
         {
-            using var SqlCon = new SqlConnection(connectionString: ConnectionString);
-            if (SqlCon.State != ConnectionState.Open)
+            using var sqlCon = new SqlConnection(connectionString: ConnectionString);
+            if (sqlCon.State != ConnectionState.Open)
             {
-                SqlCon.Open();
+                sqlCon.Open();
             }
 
             return (T) Convert.ChangeType(
-                SqlCon.ExecuteScalar(procedureName, param, commandType: CommandType.StoredProcedure), typeof(T));
+                sqlCon.ExecuteScalar(procedureName, param, commandType: CommandType.StoredProcedure), typeof(T));
         }
 
         public static IEnumerable<T> ReturnList<T>(string procedureName, DynamicParameters param = null)
         {
-            using var SqlCon = new SqlConnection(connectionString: ConnectionString);
-            if (SqlCon.State != ConnectionState.Open)
+            using var sqlCon = new SqlConnection(connectionString: ConnectionString);
+            if (sqlCon.State != ConnectionState.Open)
             {
-                SqlCon.Open();
+                sqlCon.Open();
             }
 
-            return SqlCon.Query<T>(procedureName, param, commandType: CommandType.StoredProcedure);
+            return sqlCon.Query<T>(procedureName, param, commandType: CommandType.StoredProcedure);
         }
     }
 }

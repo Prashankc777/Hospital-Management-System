@@ -10,7 +10,7 @@ namespace DAL.Repositorys
 {
     public class CustomerRepository :ICustomer
     {
-        readonly DynamicParameters param = new DynamicParameters();
+        readonly DynamicParameters _param = new DynamicParameters();
         public Customer GetCustomer(int id)
         {
             return (GetAllCustomers().FirstOrDefault(x => x.CustomerId == id));
@@ -23,35 +23,37 @@ namespace DAL.Repositorys
 
         public Customer AddCustomer(Customer Customer)
         {
-            param.Add("@customerName", Customer.CustomerName);
-            param.Add("@address", Customer.Address);
-            param.Add("@phonenumber", Customer.PhoneNumber);
-            param.Add("@STATUS", "INSERT");
-            ORM.Dapper.ExceptionWithoutReturn("CRUDCUSTOMER", param);
+            _param.Add("@customerName", Customer.CustomerName);
+            _param.Add("@address", Customer.Address);
+            _param.Add("@phonenumber", Customer.PhoneNumber);
+            _param.Add("@STATUS", "INSERT");
+            ORM.Dapper.ExceptionWithoutReturn("CRUDCUSTOMER", _param);
             return Customer;
         }
 
-        public Customer Update(Customer Customer)
+        public Customer Update(Customer customer)
         {
-            var pro = GetAllCustomers().FirstOrDefault(q => q.CustomerId == Customer.CustomerId);
+            var pro = GetAllCustomers().FirstOrDefault(q => q.CustomerId == customer.CustomerId);
             if (pro is null) return pro;
-            param.Add("@customerName", Customer.CustomerName);
-            param.Add("@address", Customer.Address);
-            param.Add("@phonenumber", Customer.PhoneNumber);
-            param.Add("@STATUS", "UPDATE");
-            param.Add("@customerID", Customer.CustomerId);
-            ORM.Dapper.ExceptionWithoutReturn("CRUDPRODUCT", param);
-            return Customer;
+            _param.Add("@customerName", customer.CustomerName);
+            _param.Add("@address", customer.Address);
+            _param.Add("@phonenumber", customer.PhoneNumber);
+            _param.Add("@STATUS", "UPDATE");
+            _param.Add("@customerID", customer.CustomerId);
+            ORM.Dapper.ExceptionWithoutReturn("CRUDCUSTOMER", _param);
+            return customer;
         }
 
         public Customer DeleteCustomer(int id)
         {
             var pro = GetAllCustomers().FirstOrDefault(q => q.CustomerId == id);
             if (pro is null) return pro;
-            param.Add("@customerID", id);
-            param.Add("@STATUS", "DELETE");
-            ORM.Dapper.ExceptionWithoutReturn("CRUDPRODUCT", param);
+            _param.Add("@customerID", id);
+            _param.Add("@status", "DELETE");
+            ORM.Dapper.ExceptionWithoutReturn("CRUDCUSTOMER", _param);
             return pro;
         }
+
+        
     }
 }

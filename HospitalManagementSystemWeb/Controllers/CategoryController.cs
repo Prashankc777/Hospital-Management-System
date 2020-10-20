@@ -54,7 +54,7 @@ namespace HospitalManagementSystemWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditProduct(Category category)
+        public IActionResult Editcategory(Category category)
         {
             if (!ModelState.IsValid) return View();
              _category.UpdateCategory(category);

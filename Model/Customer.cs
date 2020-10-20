@@ -18,6 +18,8 @@ namespace Model
         public string EditedBy { get; set; }
         public System.DateTime? EditedOn { get; set; }
         public string DeletedBy { get; set; }
+
+        public string EncryptId { get; set; }
         public string DeletedOn { get; set; }
         [Phone]
         public decimal? PhoneNumber { get; set; }
